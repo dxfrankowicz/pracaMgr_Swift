@@ -25,7 +25,7 @@ struct ContentView: View {
         operation()
         let elapsedTime = CFAbsoluteTimeGetCurrent() - startTime
         print("Czas wykonania: \(elapsedTime*1000) ms")
-        return String(format: "Czas wykonania:  %.2f ms", elapsedTime*1000)
+        return String(format: "%.2f ms", elapsedTime*1000)
     }
     
     var body: some View {
@@ -39,10 +39,6 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)}
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                     .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 10)
-                    .padding(.bottom, 10)
                 
                 Button(action: {
                     self.showFetchData = false
@@ -52,10 +48,6 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)}
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                     .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 10)
-                    .padding(.bottom, 10)
                 
                 Button(action: {
                     self.showFetchData = false
@@ -65,13 +57,22 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)}
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                     .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 10)
-                Text(time == "" ? "Czas operacji" : time)
+                
+                Text("Czas operacji: \(time)")
                     .multilineTextAlignment(.center)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                     .padding()
+                if self.showFetchData || self.showDatabase || self.showCreateWriteReadFile{
+                    Button(action: {
+                        self.showFetchData = false
+                        self.showDatabase = false
+                        self.showCreateWriteReadFile = false
+                        self.time = ""
+                    })  {Text("Reset")
+                        .multilineTextAlignment(.center)}
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                        .padding()
+                }
             }
             .frame(height: UIScreen.main.bounds.size.height/2)
             VStack(){
@@ -108,7 +109,7 @@ struct ContentView: View {
             }
             .frame(height: UIScreen.main.bounds.size.height/2)
         }
-        .padding(.vertical, 10.0)
+        .padding(.vertical, 5.0)
     }    
 }
 
