@@ -1,5 +1,4 @@
 # pracaMgr_Swift
-### ENG
 
 Project for master degree in native iOS language. 
 
